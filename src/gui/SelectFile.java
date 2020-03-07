@@ -18,8 +18,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
-import storage.Vehicle;
-import storage.VehicleCSVInput;
 
 public class SelectFile extends Application {
 //	String reportType = null;

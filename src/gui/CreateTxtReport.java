@@ -3,6 +3,7 @@ package gui;
 import java.io.File;
 import java.util.ArrayList;
 
+import input.csv.ReadVehicleCSV;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,9 +13,9 @@ import javafx.scene.control.ProgressIndicator;
 
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import output.txt.VehicleReportTXT;
 import storage.Vehicle;
-import storage.VehicleCSVInput;
-
+import input.csv.ReadVehicleCSV;
 
 public class CreateTxtReport extends Application {
 	File inputFile; 
@@ -41,13 +42,13 @@ public class CreateTxtReport extends Application {
 		stage.setScene(scene);
 		stage.show();
 		
-		openFile(inputFile);
+		boolean success = createReport(inputFile);
 	}
-
+/*
 	private void openFile(File inputFile2) {
 		try {
-			VehicleCSVInput vehicleCSVInput = new VehicleCSVInput(inputFile);
-			ArrayList<Vehicle> vehicles = vehicleCSVInput.processCSV(); 
+			ReadVehicleCSV vehicleCSV = new ReadVehicleCSV(inputFile);
+			ArrayList<Vehicle> vehicles = vehicleCSV.processCSV(); 
 			for (Vehicle vehicle : vehicles) {
 				System.out.println("Year : " + vehicle.getYear());
 				System.out.println("Make : " + vehicle.getMake());
@@ -65,6 +66,25 @@ public class CreateTxtReport extends Application {
 		String pathName = 
 				absolutePath.substring(0, (absolutePath.length() - fileName.length()));
 		return pathName; 
+	}
+	*/
+	
+	private boolean createReport(File inputFile) {
+		
+		try {
+			ReadVehicleCSV readVehicleCSV = new ReadVehicleCSV(inputFile);
+			ArrayList<Vehicle> vehicles = readVehicleCSV.processCSV(); 
+			String pathName = readVehicleCSV.getFilePath();
+			System.out.println(pathName);
+			VehicleReportTXT vehicleReportTxt = 
+					new VehicleReportTXT(vehicles, pathName, "V1Report3.txt");
+			return true;
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			return false;
+		} 
+
 	}
 	
 }

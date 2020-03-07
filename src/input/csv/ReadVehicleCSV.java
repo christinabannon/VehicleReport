@@ -1,4 +1,4 @@
-package storage;
+package input.csv;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import storage.Vehicle;
+
 /*
  * accept a file
  * save the lines as Vehicles
@@ -20,15 +22,15 @@ import java.util.Comparator;
  *  
  */
 
-public class VehicleCSVInput {
+public class ReadVehicleCSV {
 	BufferedReader bufferedReader = null;
 	File inputFile = null; 
 
-	public VehicleCSVInput(File csvFile) throws FileNotFoundException {
+	public ReadVehicleCSV(File csvFile) throws FileNotFoundException {
 		inputFile = csvFile; 
 		bufferedReader = new BufferedReader(new FileReader(inputFile));
 	}
-
+	
 	public ArrayList<Vehicle> processCSV() throws IOException {
 		String currentLine;
 		ArrayList<Vehicle> vehicles = new ArrayList<>(); 
@@ -86,5 +88,4 @@ public class VehicleCSVInput {
 			}});
 		return vehicles;
 	}
-	
 }

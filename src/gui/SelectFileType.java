@@ -1,8 +1,5 @@
 package gui;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,8 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import storage.Vehicle;
-import storage.VehicleCSVInput;
 
 public class SelectFileType extends Application {
     @Override
@@ -135,21 +130,4 @@ public class SelectFileType extends Application {
     public static void main(String[] args) {
         launch();
     }
-  
-    // make these show up in a window
-	private void openFile(File file) {
-
-		try {
-			VehicleCSVInput vehicleCSVInput = new VehicleCSVInput(file);
-			ArrayList<Vehicle> vehicles = vehicleCSVInput.processCSV(); 
-			for (Vehicle vehicle : vehicles) {
-				System.out.println("Year : " + vehicle.getYear());
-				System.out.println("Make : " + vehicle.getMake());
-				System.out.println("Model : " + vehicle.getModel());
-				System.out.println("MSRP : " + vehicle.getMSRP());
-			}
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
 }
