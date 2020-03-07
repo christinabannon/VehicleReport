@@ -25,6 +25,7 @@ public class VehicleReportTXT {
 	File txtReport = null;
 	FileWriter fileWriter = null;
 	BufferedWriter bufferedWriter = null; 
+	String report = null; 
 
 	public VehicleReportTXT(ArrayList<Vehicle> vehicles, String pathName, String fileName) {
 		txtReport = new File(pathName, fileName);
@@ -35,10 +36,14 @@ public class VehicleReportTXT {
 			E.printStackTrace();
 		}
 
-		String report = createReport(vehicles);
+		report = createReport(vehicles);
 		writeReport(report);
 	}
 
+	public String getReportString() {
+		return report; 
+	}
+	
 	private String getFormattedDate() {
 		Date date = new Date(); 
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
@@ -114,4 +119,22 @@ public class VehicleReportTXT {
 			E.printStackTrace();
 		}
 	}
+	
+	public File getReport() {
+		return txtReport;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

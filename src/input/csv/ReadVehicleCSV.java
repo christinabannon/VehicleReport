@@ -18,22 +18,35 @@ import storage.Vehicle;
  * save the lines as Vehicles
  * --- sort some how by 2 fields
  * return the Vehicles[]
- * 
- *  
  */
 
 public class ReadVehicleCSV {
-	BufferedReader bufferedReader = null;
-	File inputFile = null; 
+	private BufferedReader bufferedReader = null;
+	private File inputFile = null; 
+	private ArrayList<Vehicle> vehicles;
 
-	public ReadVehicleCSV(File csvFile) throws FileNotFoundException {
+	public ReadVehicleCSV(File csvFile) throws FileNotFoundException, IOException {
 		inputFile = csvFile; 
 		bufferedReader = new BufferedReader(new FileReader(inputFile));
+		processCSV();
+		sort();
 	}
 	
-	public ArrayList<Vehicle> processCSV() throws IOException {
+	public String getFilePath() {
+		String absolutePath = inputFile.getAbsolutePath();
+		String fileName = inputFile.getName();
+		String pathName = 
+				absolutePath.substring(0, (absolutePath.length() - fileName.length()));
+		return pathName; 
+	}
+	
+	public ArrayList<Vehicle> getVehicles() {
+		return vehicles;
+	}
+	
+	private void processCSV() throws IOException {
 		String currentLine;
-		ArrayList<Vehicle> vehicles = new ArrayList<>(); 
+		vehicles = new ArrayList<Vehicle>(); 
 		while ((currentLine = bufferedReader.readLine()) != null) {
 			Vehicle vehicle = stringToVehicle(currentLine);
 			if ( vehicle != null ) {
@@ -43,8 +56,6 @@ public class ReadVehicleCSV {
 		if (bufferedReader != null) {
 			bufferedReader.close();
 		}
-		vehicles = sort(vehicles);
-		return vehicles; 
 	}
 
 	private Vehicle stringToVehicle(String line) {
@@ -65,15 +76,7 @@ public class ReadVehicleCSV {
 		return vehicle;		
 	}
 	
-	public String getFilePath() {
-		String absolutePath = inputFile.getAbsolutePath();
-		String fileName = inputFile.getName();
-		String pathName = 
-				absolutePath.substring(0, (absolutePath.length() - fileName.length()));
-		return pathName; 
-	}
-	
-	private ArrayList<Vehicle> sort(ArrayList<Vehicle> vehicles) {
+	private void sort() {
 		Collections.sort(vehicles, new Comparator<Vehicle>() {
 			public int compare(Vehicle vehicle1, Vehicle vehicle2) {
 				Integer year1 = vehicle1.getYear();
@@ -86,6 +89,6 @@ public class ReadVehicleCSV {
 				}
 				return winner; 
 			}});
-		return vehicles;
+		//return vehicles;
 	}
 }
