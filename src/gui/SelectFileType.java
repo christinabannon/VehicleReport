@@ -53,7 +53,7 @@ public class SelectFileType extends Application {
 		final ComboBox<String> outputFileTypeComboBox = 
 				new ComboBox<String>(outputFileTypeOptions);
 		outputFileTypeComboBox.setValue(".txt");
-		
+
 		Button nextButton = new Button("Next");
 		nextButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

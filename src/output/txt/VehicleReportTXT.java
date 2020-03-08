@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import storage.Vehicle;
 
@@ -27,15 +29,13 @@ public class VehicleReportTXT {
 	BufferedWriter bufferedWriter = null; 
 	String report = null; 
 
-	public VehicleReportTXT(ArrayList<Vehicle> vehicles, String pathName, String fileName) {
-		txtReport = new File(pathName, fileName);
-
+	public VehicleReportTXT(ArrayList<Vehicle> vehicles, String pathName) {
+		txtReport = createFile(pathName);
 		try {
 			fileWriter = new FileWriter(txtReport);
 		} catch (IOException E) {
 			E.printStackTrace();
 		}
-
 		report = createReport(vehicles);
 		writeReport(report);
 	}
@@ -50,6 +50,20 @@ public class VehicleReportTXT {
 		return formatter.format(date);
 
 	}
+	
+	private File createFile(String pathName) {
+		StringBuilder vehicleReportName = new StringBuilder(pathName + "VehicleReport_");
+		Date date = new Date(); 
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+		vehicleReportName.append(formatter.format(date));
+		File file = new File(vehicleReportName.toString() + ".txt");	
+		int version = 1;
+		while (file.exists()) {
+			file = new File(vehicleReportName.toString() +"_(" + version++ + ")_" + ".txt");
+		}
+		return file;
+	}
+	
 
 	private String cashFormatBigDecimal(BigDecimal bigDecimal) {
 		DecimalFormat decimalFormat = new DecimalFormat("#,###.00");

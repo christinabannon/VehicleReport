@@ -28,8 +28,19 @@ public class ReadVehicleCSV {
 	public ReadVehicleCSV(File csvFile) throws FileNotFoundException, IOException {
 		inputFile = csvFile; 
 		bufferedReader = new BufferedReader(new FileReader(inputFile));
-		processCSV();
-		sort();
+
+		String extension = inputFile.getName().substring(inputFile.getName().lastIndexOf("."));
+		String splitAround = "";
+		
+		switch(extension) {
+		case ".csv":
+			splitAround = ",";
+			break;
+		case ".tsv":
+			splitAround = "\t";
+			break;
+		}
+		processInputFile(splitAround);
 	}
 	
 	public String getFilePath() {
@@ -43,12 +54,12 @@ public class ReadVehicleCSV {
 	public ArrayList<Vehicle> getVehicles() {
 		return vehicles;
 	}
-	
-	private void processCSV() throws IOException {
+
+	private void processInputFile(String splitAlong) throws IOException {
 		String currentLine;
 		vehicles = new ArrayList<Vehicle>(); 
 		while ((currentLine = bufferedReader.readLine()) != null) {
-			Vehicle vehicle = stringToVehicle(currentLine);
+			Vehicle vehicle = stringToVehicle(currentLine, splitAlong);
 			if ( vehicle != null ) {
 				vehicles.add(vehicle);
 			}
@@ -58,11 +69,10 @@ public class ReadVehicleCSV {
 		}
 	}
 
-	private Vehicle stringToVehicle(String line) {
-		String [] csvLine = line.split(",");
+	private Vehicle stringToVehicle(String line, String splitAlong) {
+		String [] csvLine = line.split(splitAlong);
 		Vehicle vehicle = null; 
 		try {
-			// this will need to change with the gui
 			if (csvLine.length == 4) {
 			int year = Integer.parseInt(csvLine[0]);
 			String make = csvLine[1];

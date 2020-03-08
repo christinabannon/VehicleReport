@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -33,7 +32,6 @@ public class SelectFile extends Application {
 	public void start(Stage stage) throws Exception {
 		Label inputFileLabel = new Label("Select " + inputFileType + " Input File: ");
 		Label fileTextLabel = new Label("");
-	//	HBox fileDisplayBox = new HBox();
 		Button browseButton = new Button("Browse");
 		Button createButton = new Button("Create");
 		Button backButton = new Button("Back");
