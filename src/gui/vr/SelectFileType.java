@@ -1,5 +1,6 @@
 package gui.vr;
 
+import gui.Start;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 public class SelectFileType extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
     	
     	Label instructions = new Label();
     	instructions.setWrapText(true);
@@ -69,18 +70,24 @@ public class SelectFileType extends Application {
 					errorAlert.showAndWait();
 					*/
 					selectFileWindow.start(new Stage());
-					primaryStage.close();
+					stage.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	
-		Button closeButton = new Button("Close");
-		closeButton.setOnAction(new EventHandler<ActionEvent>() {
+		Button backButton = new Button("Close");
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				primaryStage.close();
+				Start startStage = new Start();
+				try {
+					startStage.start(new Stage());
+					stage.close();
+				} catch (Exception e) {
+					// find something to do with that
+				}
 			}
 		});
 		
@@ -88,7 +95,7 @@ public class SelectFileType extends Application {
 		inputFileTypeComboBox.setMaxWidth(Double.MAX_VALUE);
 		outputFileTypeComboBox.setMaxWidth(Double.MAX_VALUE);
 		nextButton.setMaxWidth(Double.MAX_VALUE);
-		closeButton.setMaxWidth(Double.MAX_VALUE);
+		backButton.setMaxWidth(Double.MAX_VALUE);
 		
     	double standardSpacing = 15;	
     	
@@ -113,20 +120,22 @@ public class SelectFileType extends Application {
     	gridPane.add(inputFileTypeComboBox,  2, 1, 2, 1);
     	gridPane.add(outputFileTypeLabel,    0, 2, 2, 1);
     	gridPane.add(outputFileTypeComboBox, 2, 2, 2, 1);
-    	gridPane.add(closeButton,            2, 3);
+    	gridPane.add(backButton,            2, 3);
     	gridPane.add(nextButton,             3, 3);
     	gridPane.setAlignment(Pos.CENTER);
 		
 		Scene scene = new Scene(gridPane, 350, 225);
 
-		primaryStage.setTitle("Create New Report: Specify File Types");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		stage.setTitle("Create New Report: Specify File Types");
+		stage.setScene(scene);
+		stage.show();
     }
     
 
+    /*
 
     public static void main(String[] args) {
         launch();
     }
+    */
 }

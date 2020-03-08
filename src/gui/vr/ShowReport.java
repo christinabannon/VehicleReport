@@ -59,6 +59,7 @@ public class ShowReport extends Application {
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				stage.close();
 				System.exit(0);
 			}
 		});
