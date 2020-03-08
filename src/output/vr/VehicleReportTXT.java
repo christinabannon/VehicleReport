@@ -139,17 +139,3 @@ public class VehicleReportTXT {
 		return txtReport;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

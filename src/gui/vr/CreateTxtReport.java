@@ -4,6 +4,7 @@
  * output/vr/VehicleReportTXT for it to be formatted into a .txt report. 
  * 
  * The CreateTxtReport window will likely never be seen unless something goes wrong. 
+ * Once the report is created, user is immediately brought to ShowReport.
  */
 
 package gui.vr;

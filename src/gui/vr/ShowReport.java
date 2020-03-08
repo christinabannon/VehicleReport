@@ -1,5 +1,9 @@
-package gui.vr;
+/**
+ * ShowReport is the final window in the series, 
+ * user can view their new report and close out of the program.
+ */
 
+package gui.vr;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -32,6 +36,7 @@ public class ShowReport extends Application {
 		Label locationLabel = new Label("Report Location: ");
 		Label fileLocationLabel = new Label(reportFile.getAbsolutePath());
 		Button openFileButton = new Button("Open Report");
+		Button newReportButton = new Button("New Report");
 		Button doneButton = new Button("Done");
 		
 		openFileButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -51,6 +56,15 @@ public class ShowReport extends Application {
 			}
 		});
 		
+		newReportButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				SelectFileType selectFileType = new SelectFileType();
+				selectFileType.start(new Stage());
+				stage.close();
+			}
+		});
+		
 		doneButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -63,6 +77,7 @@ public class ShowReport extends Application {
 		fileLocationLabel.setStyle("-fx-background-color: white;");
 		fileLocationLabel.setMaxWidth(Double.MAX_VALUE);
 		openFileButton.setMaxWidth(Double.MAX_VALUE);
+		newReportButton.setMaxWidth(Double.MAX_VALUE);
 		doneButton.setMaxWidth(Double.MAX_VALUE);
 		
     	ColumnConstraints col = new ColumnConstraints();
@@ -76,7 +91,8 @@ public class ShowReport extends Application {
 		gridPane.add(reportCreatedLabel, 0, 0, 3, 1);
 		gridPane.add(locationLabel,      0, 1, 1, 1);
 		gridPane.add(fileLocationLabel,  1, 1, 5, 1);
-		gridPane.add(openFileButton,     4, 2, 1, 1);
+		gridPane.add(openFileButton,     3, 2, 1, 1);
+		gridPane.add(newReportButton,    4, 2, 1, 1);
 		gridPane.add(doneButton,         5, 2, 1, 1);
 		gridPane.setAlignment(Pos.CENTER);
 		gridPane.setMaxWidth(Double.MAX_VALUE);

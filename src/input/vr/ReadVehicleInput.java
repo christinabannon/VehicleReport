@@ -1,3 +1,8 @@
+/**
+ * ReadVehicleInput is accessed by gui/vr/CreateTxtReport to convert the lines
+ * of a .csv or .tsv file into an ArrayList of Vehicle objects. 
+ */
+
 package input.vr;
 
 import java.io.BufferedReader;
@@ -10,21 +15,22 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
 import storage.vr.Vehicle;
-
-/*
- * accept a file
- * save the lines as Vehicles
- * --- sort some how by 2 fields
- * return the Vehicles[]
- */
 
 public class ReadVehicleInput {
 	private BufferedReader bufferedReader = null;
 	private File inputFile = null; 
 	private ArrayList<Vehicle> vehicles;
 
+	/**
+	 * Since the functions of this class ultimately add up to one task, 
+	 * it made sense to put the series of methods to be performed within 
+	 * the constructor.
+	 * 
+	 * @param csvFile
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	public ReadVehicleInput(File csvFile) throws FileNotFoundException, IOException {
 		inputFile = csvFile; 
 		bufferedReader = new BufferedReader(new FileReader(inputFile));
@@ -41,8 +47,12 @@ public class ReadVehicleInput {
 			break;
 		}
 		processInputFile(splitAround);
+		sort();
 	}
 	
+	/**
+	 * getFilePath takes the file path from the input file and returns it
+	 */
 	public String getFilePath() {
 		String absolutePath = inputFile.getAbsolutePath();
 		String fileName = inputFile.getName();
@@ -51,15 +61,28 @@ public class ReadVehicleInput {
 		return pathName; 
 	}
 	
+	/**
+	 * getVehicles returns an ArrayList containing all of the vehicle objects 
+	 * found in the input file .
+	 */
 	public ArrayList<Vehicle> getVehicles() {
 		return vehicles;
 	}
 
-	private void processInputFile(String splitAlong) throws IOException {
+	/**
+	 * processInputFile takes argument "splitAround" as it's 
+	 * String to split the line around, depending on if the input
+	 * is a .csv or a .tsv file. 
+	 * From there it passes each line
+	 * to stringToVehicle, gets back a Vehicle, 
+	 * and adds the Vehicle object to the vehicles ArrayList.
+	 * 
+	 */
+	private void processInputFile(String splitAround) throws IOException {
 		String currentLine;
 		vehicles = new ArrayList<Vehicle>(); 
 		while ((currentLine = bufferedReader.readLine()) != null) {
-			Vehicle vehicle = stringToVehicle(currentLine, splitAlong);
+			Vehicle vehicle = stringToVehicle(currentLine, splitAround);
 			if ( vehicle != null ) {
 				vehicles.add(vehicle);
 			}
@@ -69,15 +92,25 @@ public class ReadVehicleInput {
 		}
 	}
 
+	/**
+	 * stringToVehicle takes a string, splits it into an array of words
+	 * and creates a new Vehicle object from the ordered list of words
+	 * which is then returned to the calling method (processInputFile).
+	 * 
+	 * If anything is amiss with the list of words, 
+	 * the vehicle object is not created and the method returns a null, 
+	 * which will be discarded instead of added to the vehicles ArrayList. 
+	 * 
+	 */
 	private Vehicle stringToVehicle(String line, String splitAlong) {
-		String [] csvLine = line.split(splitAlong);
+		String [] fileLine = line.split(splitAlong);
 		Vehicle vehicle = null; 
 		try {
-			if (csvLine.length == 4) {
-			int year = Integer.parseInt(csvLine[0]);
-			String make = csvLine[1];
-			String model = csvLine[2];
-			BigDecimal msrp = new BigDecimal(csvLine[3]);
+			if(fileLine.length == 4) {
+			int year = Integer.parseInt(fileLine[0]);
+			String make = fileLine[1];
+			String model = fileLine[2];
+			BigDecimal msrp = new BigDecimal(fileLine[3]);
 			vehicle = new Vehicle(year, make, model, msrp);
 			}
 		} catch (NumberFormatException e) {
@@ -86,6 +119,10 @@ public class ReadVehicleInput {
 		return vehicle;		
 	}
 	
+	/**
+	 * sort() sorts the stored vehicles ArrayList first by year 
+	 * and second by make. 
+	 */
 	private void sort() {
 		Collections.sort(vehicles, new Comparator<Vehicle>() {
 			public int compare(Vehicle vehicle1, Vehicle vehicle2) {
@@ -99,6 +136,5 @@ public class ReadVehicleInput {
 				}
 				return winner; 
 			}});
-		//return vehicles;
 	}
 }
