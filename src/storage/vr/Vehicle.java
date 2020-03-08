@@ -1,20 +1,11 @@
+/**
+ * Vehicle class holds info on a vehicle necessary for a report. 
+ * 
+ */
+
 package storage.vr;
 import java.math.BigDecimal;
 
-
-/*Note: for java fx need to uncheck X thing
- * need to include user made java fx library
- * need to create a new java fx project
- * 
- * 
- * overarching goals
- *  - read from few different types of files
- *  - store data from a few different types of files
- *  - store data in different orders than the order given?
- *  - maybe parallel array - 1 to hold input order, another to map to appropriate thing
- *  - generate reports sorted on what he wanted
- *  - offer options for different types of sorts
- */
 public class Vehicle {
 	
 	private int year;
@@ -22,6 +13,9 @@ public class Vehicle {
 	private String model;
 	private BigDecimal msrp;
 	
+	/**
+	 * Vehicle cannot be made without parameters for the 4 fields that we will use in the report
+	 */
 	public Vehicle(int year, String make, String model, BigDecimal msrp) {
 		this.year = year; 
 		this.make = cleanMake(make);
@@ -29,28 +23,49 @@ public class Vehicle {
 		this.msrp = msrp; 
 	}
 
+	/**
+	 * cleanMake acts on the assumption that everything outside of a letter is an error,
+	 * and takes it out, then formats the String to look how it should in the report. 
+	 */
 	private String cleanMake(String make) {
 		String cleanMake = make.trim().replaceAll("[^a-zA-Z]", "");
 		return cleanMake.substring(0,1).toUpperCase() + cleanMake.substring(1).toLowerCase();
 	}
 	
+	/**
+	 * cleanModel allows certain symbols to be present in the model String, 
+	 * but takes out ones that are unlikely to be anything other than an error. 
+	 * then formats the String to look how it should in the report. 
+	 */
 	private String cleanModel(String model) {
 		String cleanModel = model.replaceAll("[$|#|@|!|%|^|&|*|(|)|]", "").trim();
 		return cleanModel.substring(0,1).toUpperCase() + cleanModel.substring(1).toLowerCase();
 	}
 
+	/**
+	 * getYear returns the saved year of the vehicle
+	 */
 	public int getYear() {
 		return year; 
 	}
 	
+	/**
+	 * getMake returns the saved make of the vehicle
+	 */
 	public String getMake() {
 		return make; 
 	}
 	
+	/**
+	 * getModel returns the saved model of the vehicle
+	 */
 	public String getModel() {
 		return model; 
 	}
 	
+	/**
+	 * getMSRP returns the saved MSRP
+	 */
 	public BigDecimal getMSRP() {
 		return msrp;
 	}
