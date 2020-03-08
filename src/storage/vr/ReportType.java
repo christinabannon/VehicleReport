@@ -1,4 +1,4 @@
-package storage;
+package storage.vr;
 
 public class ReportType {
 	String inputFile;

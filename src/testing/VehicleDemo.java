@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import input.csv.ReadVehicleCSV;
-import output.txt.VehicleReportTXT;
-import storage.Vehicle;
+import input.vr.ReadVehicleInput;
+import output.vr.VehicleReportTXT;
+import storage.vr.Vehicle;
 
 public class VehicleDemo {
 	public static void main(String [] args) throws IOException {
@@ -57,9 +57,7 @@ public class VehicleDemo {
 		}
 		
 		System.out.print(stringBuilder.toString());
-		
-		
-	
+
 		File file = new File("/Users/christinabannon/FileFolder/Vehicles.csv");
 		
 		try {

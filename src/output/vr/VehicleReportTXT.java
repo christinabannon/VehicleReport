@@ -1,4 +1,4 @@
-package output.txt;
+package output.vr;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,12 +8,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import java.util.Date;
+
+import storage.vr.Vehicle;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import storage.Vehicle;
 
 
 

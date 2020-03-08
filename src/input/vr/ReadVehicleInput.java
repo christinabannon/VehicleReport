@@ -1,4 +1,4 @@
-package input.csv;
+package input.vr;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import storage.Vehicle;
+import storage.vr.Vehicle;
 
 /*
  * accept a file
@@ -20,12 +20,12 @@ import storage.Vehicle;
  * return the Vehicles[]
  */
 
-public class ReadVehicleCSV {
+public class ReadVehicleInput {
 	private BufferedReader bufferedReader = null;
 	private File inputFile = null; 
 	private ArrayList<Vehicle> vehicles;
 
-	public ReadVehicleCSV(File csvFile) throws FileNotFoundException, IOException {
+	public ReadVehicleInput(File csvFile) throws FileNotFoundException, IOException {
 		inputFile = csvFile; 
 		bufferedReader = new BufferedReader(new FileReader(inputFile));
 

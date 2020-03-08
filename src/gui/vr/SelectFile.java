@@ -1,4 +1,4 @@
-package gui;
+package gui.vr;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class SelectFile extends Application {
 	String inputFileType = null;
 	String outputFileType = null;
 	
-	public SelectFile(String reportType, String inputFileType, String outputFileType) {
+	public SelectFile(String inputFileType, String outputFileType) {
 		this.inputFileType = inputFileType.toLowerCase();
 		this.outputFileType = outputFileType.toLowerCase();
 	}
@@ -84,6 +84,7 @@ public class SelectFile extends Application {
 		});
 
 		fileTextLabel.setStyle("-fx-border-style: solid;");
+		fileTextLabel.setStyle("-fx-background-color: white;");
 		fileTextLabel.setMaxWidth(Double.MAX_VALUE);
 		browseButton.setMaxWidth(Double.MAX_VALUE);
 		backButton.setMaxWidth(Double.MAX_VALUE);

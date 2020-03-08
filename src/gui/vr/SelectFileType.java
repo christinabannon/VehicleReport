@@ -1,4 +1,4 @@
-package gui;
+package gui.vr;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -21,10 +21,10 @@ public class SelectFileType extends Application {
     	
     	Label instructions = new Label();
     	instructions.setWrapText(true);
-    	instructions.setText("To start a report: \n"
+    	instructions.setText("To start a Vehicle Report: \n"
     			+ "\t1. Make the following selections \n"
-    			+ "\t2. Click the Next Step button.");
-
+    			+ "\t2. Click the Next button.");
+/*
 		Label reportTypeLabel = new Label("Select a Report Type: ");
 		ObservableList<String> reportTypeOptions = 
 				FXCollections.observableArrayList(
@@ -33,7 +33,7 @@ public class SelectFileType extends Application {
 		final ComboBox<String> reportTypeComboBox = 
 				new ComboBox<String>(reportTypeOptions);
 		reportTypeComboBox.setValue("Vehicle Cost Report");
-		
+*/		
 		Label inputFileTypeLabel = new Label("Select Input File Type: ");
 		ObservableList<String> inputFileTypeOptions = 
 				FXCollections.observableArrayList(
@@ -60,8 +60,7 @@ public class SelectFileType extends Application {
 			public void handle(ActionEvent event) {
 				try {
 					SelectFile selectFileWindow = 
-							new SelectFile(reportTypeComboBox.getValue(), 
-									inputFileTypeComboBox.getValue(),
+							new SelectFile(inputFileTypeComboBox.getValue(),
 									outputFileTypeComboBox.getValue());
 					/*
 					Alert errorAlert = new Alert(AlertType.ERROR);
@@ -85,7 +84,7 @@ public class SelectFileType extends Application {
 			}
 		});
 		
-		reportTypeComboBox.setMaxWidth(Double.MAX_VALUE);
+	//	reportTypeComboBox.setMaxWidth(Double.MAX_VALUE);
 		inputFileTypeComboBox.setMaxWidth(Double.MAX_VALUE);
 		outputFileTypeComboBox.setMaxWidth(Double.MAX_VALUE);
 		nextButton.setMaxWidth(Double.MAX_VALUE);
@@ -108,17 +107,17 @@ public class SelectFileType extends Application {
     	
     				// startCol, startRow, colsWide, rowsTall
     	gridPane.add(instructions,           0, 0, 3, 1); 
-    	gridPane.add(reportTypeLabel,        0, 1, 2, 1); 
-    	gridPane.add(reportTypeComboBox,     2, 1, 2, 1);
-    	gridPane.add(inputFileTypeLabel,     0, 2, 2, 1);
-    	gridPane.add(inputFileTypeComboBox,  2, 2, 2, 1);
-    	gridPane.add(outputFileTypeLabel,    0, 3, 2, 1);
-    	gridPane.add(outputFileTypeComboBox, 2, 3, 2, 1);
-    	gridPane.add(closeButton,            2, 4);
-    	gridPane.add(nextButton,             3, 4);
+   // 	gridPane.add(reportTypeLabel,        0, 1, 2, 1); 
+  //  	gridPane.add(reportTypeComboBox,     2, 1, 2, 1);
+    	gridPane.add(inputFileTypeLabel,     0, 1, 2, 1);
+    	gridPane.add(inputFileTypeComboBox,  2, 1, 2, 1);
+    	gridPane.add(outputFileTypeLabel,    0, 2, 2, 1);
+    	gridPane.add(outputFileTypeComboBox, 2, 2, 2, 1);
+    	gridPane.add(closeButton,            2, 3);
+    	gridPane.add(nextButton,             3, 3);
     	gridPane.setAlignment(Pos.CENTER);
 		
-		Scene scene = new Scene(gridPane, 400, 250);
+		Scene scene = new Scene(gridPane, 350, 225);
 
 		primaryStage.setTitle("Create New Report: Specify File Types");
 		primaryStage.setScene(scene);

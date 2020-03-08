@@ -1,12 +1,10 @@
-package gui;
+package gui.vr;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;  
 import java.util.ArrayList;
 
-import input.csv.ReadVehicleCSV;
+import input.vr.ReadVehicleInput;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,8 +16,8 @@ import javafx.scene.control.ProgressIndicator;
 
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import output.txt.VehicleReportTXT;
-import storage.Vehicle;
+import output.vr.VehicleReportTXT;
+import storage.vr.Vehicle;
 
 public class CreateTxtReport extends Application {
 	File inputFile; 
@@ -59,9 +57,9 @@ public class CreateTxtReport extends Application {
 	
 	private boolean createReport(File inputFile) {
 		try {
-			ReadVehicleCSV readVehicleCSV = new ReadVehicleCSV(inputFile);
-			ArrayList<Vehicle> vehicles = readVehicleCSV.getVehicles();
-			String pathName = readVehicleCSV.getFilePath();
+			ReadVehicleInput readVehicleInput = new ReadVehicleInput(inputFile);
+			ArrayList<Vehicle> vehicles = readVehicleInput.getVehicles();
+			String pathName = readVehicleInput.getFilePath();
 			VehicleReportTXT vehicleReportTxt = 
 					new VehicleReportTXT(vehicles, pathName);
 			outputFile = vehicleReportTxt.getReport();

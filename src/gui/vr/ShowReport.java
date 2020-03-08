@@ -1,4 +1,4 @@
-package gui;
+package gui.vr;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -22,21 +22,22 @@ public class ShowReport extends Application {
 
 	/*
 	public static void main(String [] args) {
+		reportFile = new File("/Users/christinabannon/FileFolder/VehicleReport_03-08-2020_\\(3\\)_.txt");
 		launch(args);
 	}
 */
 	public ShowReport(File reportFile) {
 		this.reportFile = reportFile;
 	}
-
 	@Override
 	public void start(Stage stage) {
 		
 		GridPane gridPane = new GridPane();
 		Label reportCreatedLabel = new Label("Report successfully created!");
-		Label locationLabel = new Label("Location: ");
+		Label locationLabel = new Label("Report Location: ");
 		Label fileLocationLabel = new Label(reportFile.getAbsolutePath());
 		Button openFileButton = new Button("Open Report");
+		Button doneButton = new Button("Done");
 		
 		openFileButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -54,25 +55,37 @@ public class ShowReport extends Application {
 				}
 			}
 		});
+		
+		doneButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.exit(0);
+			}
+		});
 
 		fileLocationLabel.setStyle("-fx-border-style: solid;");
 		fileLocationLabel.setStyle("-fx-background-color: white;");
-		
+		fileLocationLabel.setMaxWidth(Double.MAX_VALUE);
 		openFileButton.setMaxWidth(Double.MAX_VALUE);
-    	ColumnConstraints quarterCol = new ColumnConstraints();
-    	quarterCol.setPercentWidth(25);	
-    	gridPane.getColumnConstraints().addAll(quarterCol, quarterCol, quarterCol, quarterCol);
-		gridPane.setGridLinesVisible(true);
+		doneButton.setMaxWidth(Double.MAX_VALUE);
+		
+    	ColumnConstraints col = new ColumnConstraints();
+    	col.setPercentWidth(17);	
+    	gridPane.getColumnConstraints().addAll(col, col, col, col, col, col);
 		int standardSpacing = 10;
 		gridPane.setVgap(standardSpacing);
+		gridPane.setHgap(standardSpacing);
 		gridPane.setPadding(new Insets(standardSpacing));
-		gridPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
 		gridPane.add(reportCreatedLabel, 0, 0, 3, 1);
 		gridPane.add(locationLabel,      0, 1, 1, 1);
-		gridPane.add(fileLocationLabel,  1, 1, 4, 1);
-		gridPane.add(openFileButton,     2, 2, 1, 1);
+		gridPane.add(fileLocationLabel,  1, 1, 5, 1);
+		gridPane.add(openFileButton,     4, 2, 1, 1);
+		gridPane.add(doneButton,         5, 2, 1, 1);
 		gridPane.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(gridPane, 400, 120);
+		gridPane.setMaxWidth(Double.MAX_VALUE);
+		Scene scene = new Scene(gridPane, 710, 120);
+		
 		stage.setTitle("View Report");
 		stage.setScene(scene);
 		stage.show();
