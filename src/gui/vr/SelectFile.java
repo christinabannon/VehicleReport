@@ -1,3 +1,12 @@
+/**
+ * In SelectFile a user is prompted to select a file for input, and they can only 
+ * select a file with the input file extension they chose in the previous window. 
+ * Once a file is selected the absolute path of the file is displayed to the user. 
+ * 
+ * From here a user can go on to CreateTxtReport to actually create their report, 
+ * or they can go back to SelectFileType. 
+ */
+
 package gui.vr;
 
 import java.io.File;
@@ -19,7 +28,6 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class SelectFile extends Application {
-//	String reportType = null;
 	String inputFileType = null;
 	String outputFileType = null;
 	
@@ -45,7 +53,6 @@ public class SelectFile extends Application {
 				File inputFile = fileChooser.showOpenDialog(stage);
 				if (inputFile != null) {
 					fileTextLabel.setText(inputFile.getAbsolutePath().toString());
-					// Which should take priority? text or browse?
 				}
 			}
 		});
@@ -64,7 +71,6 @@ public class SelectFile extends Application {
 			public void handle(ActionEvent event) {
 				String fileString = fileTextLabel.getText();
 				
-				
 				if (fileString.length() > 0) {
 					try {
 						CreateTxtReport createReport = new CreateTxtReport(fileString, outputFileType);
@@ -77,7 +83,7 @@ public class SelectFile extends Application {
 				}
 				else {
 					Alert errorAlert = new Alert(AlertType.ERROR);
-					errorAlert.setHeaderText("Select an input file to make a report.");
+					errorAlert.setHeaderText("Select a " + inputFileType + " file to make a report.");
 					errorAlert.showAndWait();
 				}
 			}
@@ -94,8 +100,7 @@ public class SelectFile extends Application {
 		ColumnConstraints fifthCol = new ColumnConstraints();
 		fifthCol.setPercentWidth(20);
 		double standardSpacing = 15;
-//		gridPane.setGridLinesVisible(true);
-
+		
     	gridPane.setHgap(standardSpacing);
     	gridPane.setVgap(standardSpacing);
     	gridPane.setPadding(new Insets(standardSpacing));

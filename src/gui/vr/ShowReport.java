@@ -1,5 +1,6 @@
 package gui.vr;
 
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -20,12 +21,6 @@ public class ShowReport extends Application {
 
 	File reportFile;
 
-	/*
-	public static void main(String [] args) {
-		reportFile = new File("/Users/christinabannon/FileFolder/VehicleReport_03-08-2020_\\(3\\)_.txt");
-		launch(args);
-	}
-*/
 	public ShowReport(File reportFile) {
 		this.reportFile = reportFile;
 	}

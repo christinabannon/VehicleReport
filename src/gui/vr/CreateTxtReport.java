@@ -1,3 +1,11 @@
+/**
+ * CreateTxtReport takes the input file, and passes it to input/vr/ReadVehicleInput turn the
+ * .csv /.tsv input into a sorted ArrayList, then takes that ArrayList and passes it to 
+ * output/vr/VehicleReportTXT for it to be formatted into a .txt report. 
+ * 
+ * The CreateTxtReport window will likely never be seen unless something goes wrong. 
+ */
+
 package gui.vr;
 
 import java.io.File;
